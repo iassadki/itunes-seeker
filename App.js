@@ -42,7 +42,7 @@ export default function App() {
         }}
       >
         <Tab.Screen name="Home" component={HomeStack} />
-        <Tab.Screen name="Liked" component={LikedSongsScreen} />
+        <Tab.Screen name="Liked Songs" component={LikedSongsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
