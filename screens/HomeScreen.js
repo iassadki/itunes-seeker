@@ -1,6 +1,8 @@
 // HomeScreen.js
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
+import LikedSongsScreen from './LikedSongsScreen';
+import SongScreen from './SongScreen';
 
 const songs = [
     { id: 1, title: 'Song 1' },
@@ -21,6 +23,10 @@ export default function HomeScreen() {
                     </View>
                 )}
                 keyExtractor={(item) => item.id.toString()}
+            />
+            <Button
+                title="Go to Song Infos"
+                onPress={() => navigation.navigate('SongScreen')}
             />
         </View>
     );

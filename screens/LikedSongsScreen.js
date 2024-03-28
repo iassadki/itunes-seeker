@@ -1,6 +1,7 @@
-// LikedSongsScreen.js
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
+import HomeScreen from './HomeScreen';
+import SongScreen from './SongScreen';
 
 const songs = [
     { id: 1, title: 'Song 1' },

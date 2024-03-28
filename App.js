@@ -1,11 +1,12 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView, ScrollView, Text, StyleSheet } from 'react-native';
-import LikedSongsScreen from './LikedSongsScreen';
-import SongScreen from './SongScreen';
-import HomeScreen from './HomeScreen';
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+// import { MaterialCommunityIcons } from "@expo/vector-icons";
+import LikedSongsScreen from './screens/LikedSongsScreen';
+import SongScreen from './screens/SongScreen';
+import HomeScreen from './screens/HomeScreen';
 
 const Tab = createBottomTabNavigator();
 

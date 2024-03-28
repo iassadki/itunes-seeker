@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
+import HomeScreen from './HomeScreen';
+import LikedSongsScreen from './LikedSongsScreen';
 
 export default function SongScreen() {
     return (
@@ -13,7 +15,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'white', // changer 'color' à 'backgroundColor'
+        backgroundColor: 'white',
         justifyContent: 'center',
     },
 });
