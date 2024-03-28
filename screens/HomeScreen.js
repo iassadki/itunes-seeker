@@ -1,32 +1,37 @@
-// HomeScreen.js
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
-import LikedSongsScreen from './LikedSongsScreen';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import SongScreen from './SongScreen';
 
 const songs = [
     { id: 1, title: 'Song 1' },
     { id: 2, title: 'Song 2' },
     { id: 3, title: 'Song 3' },
-    // Ajoutez plus de chansons si nécessaire
 ];
 
 export default function HomeScreen() {
+    const navigation = useNavigation();
+
+    const handleSongPress = (songId) => {
+        navigation.navigate('SongScreen', { songId });
+    };
+
+    const renderSongItem = ({ item }) => (
+        <TouchableOpacity
+            style={styles.songItem}
+            onPress={() => handleSongPress(item.id)}
+        >
+            <Text>{item.title}</Text>
+        </TouchableOpacity>
+    );
+
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Featured Songs</Text>
             <FlatList
                 data={songs}
-                renderItem={({ item }) => (
-                    <View style={styles.songItem}>
-                        <Text>{item.title}</Text>
-                    </View>
-                )}
+                renderItem={renderSongItem}
                 keyExtractor={(item) => item.id.toString()}
-            />
-            <Button
-                title="Go to Song Infos"
-                onPress={() => navigation.navigate('SongScreen')}
             />
         </View>
     );
