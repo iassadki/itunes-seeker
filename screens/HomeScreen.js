@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Feather } from '@expo/vector-icons';
 
 export default function HomeScreen() {
 
     const [musicList, setMusicList] = useState([]);
+    const [likedMusic, setLikedMusic] = useState([]);
     const navigation = useNavigation();
 
     useEffect(() => {
         const fetchMusic = async () => {
             try {
                 // search music
-                const response = await fetch('https://itunes.apple.com/search?media=music&term=djsnake');
+                const response = await fetch('https://itunes.apple.com/search?media=music&term=thylacine');
                 const data = await response.json();
                 setMusicList(data.results);
             } catch (error) {
@@ -22,6 +24,10 @@ export default function HomeScreen() {
         // Appel de la fonction fetchMusic pour récupérer les musiques
         fetchMusic();
     }, []);
+
+    const handleLike = (music) => {
+        setLikedMusic([...likedMusic, music]);
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -35,6 +41,9 @@ export default function HomeScreen() {
                             <Text style={styles.text}>{music.artistName}</Text>
                             <Text style={styles.text}>{music.collectionName}</Text>
                         </View>
+                        <TouchableOpacity style={styles.likeButton} onPress={() => handleLike(music)}>
+                            <Feather name="heart" size={24} color="red" />
+                        </TouchableOpacity>
                     </TouchableOpacity>
                 ))}
             </ScrollView>
@@ -76,5 +85,10 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 14,
         fontWeight: '500',
+    },
+    likeButton: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
     }
 });

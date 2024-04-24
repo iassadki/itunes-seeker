@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 
-export default function SongScreen() {
+export default function SongDetailsScreen() {
     return (
         <View style={styles.container}>
-            <Text>Song Infos Screen</Text>
+            <Text>Song Details Screen</Text>
         </View>
     );
 }
