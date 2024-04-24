@@ -5,7 +5,7 @@ import { SafeAreaView, ScrollView, Text, StyleSheet } from 'react-native';
 import HomeScreen from './screens/HomeScreen.js';
 import LikedSongsScreen from './screens/LikedSongsScreen';
 import SearchScreen from './screens/SearchScreen';
-import SongScreen from './screens/SongScreen';
+import SongDetailsScreen from './screens/SongDetailsScreen.js';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
