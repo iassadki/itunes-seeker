@@ -1,12 +1,12 @@
+// LikedSongsScreen.js
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
-import HomeScreen from './HomeScreen';
-import SongScreen from './SongScreen';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 
 const songs = [
     { id: 1, title: 'Song 1' },
     { id: 2, title: 'Song 2' },
     { id: 3, title: 'Song 3' },
+    // Ajoutez plus de chansons si nécessaire
 ];
 
 export default function LikedSongsScreen() {

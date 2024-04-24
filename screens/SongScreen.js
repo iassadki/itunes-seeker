@@ -1,7 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
-import HomeScreen from './HomeScreen';
-import LikedSongsScreen from './LikedSongsScreen';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
 export default function SongScreen() {
     return (

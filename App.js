@@ -1,36 +1,14 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView, ScrollView, Text, StyleSheet } from 'react-native';
+import HomeScreen from './screens/HomeScreen.js';
 import LikedSongsScreen from './screens/LikedSongsScreen';
+import SearchScreen from './screens/SearchScreen';
 import SongScreen from './screens/SongScreen';
-import HomeScreen from './screens/HomeScreen';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
-
-function HomeStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="LikedSongsScreen"
-        component={LikedSongsScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="SongScreen"
-        component={SongScreen}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
-  );
-}
 
 export default function App() {
   return (
@@ -41,9 +19,17 @@ export default function App() {
           inactiveTintColor: 'gray',
         }}
       >
-        <Tab.Screen name="Home" component={HomeStack} />
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Search" component={SearchScreen} />
         <Tab.Screen name="Liked Songs" component={LikedSongsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+});

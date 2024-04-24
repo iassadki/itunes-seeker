@@ -1,39 +1,41 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import SongScreen from './SongScreen';
-
-const songs = [
-    { id: 1, title: 'Song 1' },
-    { id: 2, title: 'Song 2' },
-    { id: 3, title: 'Song 3' },
-];
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 
 export default function HomeScreen() {
-    const navigation = useNavigation();
 
-    const handleSongPress = (songId) => {
-        navigation.navigate('SongScreen', { songId });
-    };
+    const [musicList, setMusicList] = useState([]);
 
-    const renderSongItem = ({ item }) => (
-        <TouchableOpacity
-            style={styles.songItem}
-            onPress={() => handleSongPress(item.id)}
-        >
-            <Text>{item.title}</Text>
-        </TouchableOpacity>
-    );
+    useEffect(() => {
+        const fetchMusic = async () => {
+            try {
+                // search music
+                const response = await fetch('https://itunes.apple.com/search?media=music&term=djsnake');
+                const data = await response.json();
+                setMusicList(data.results);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        // Appel de la fonction fetchMusic pour récupérer les musiques
+        fetchMusic();
+    }, []);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>Featured Songs</Text>
-            <FlatList
-                data={songs}
-                renderItem={renderSongItem}
-                keyExtractor={(item) => item.id.toString()}
-            />
-        </View>
+        <SafeAreaView style={styles.container}>
+            <ScrollView>
+                <Text>Liste de musiques depuis l'API iTunes :</Text>
+                {musicList.map((music, index) => (
+                    <View key={index}>
+                        <Text>Titre : {music.trackName}</Text>
+                        <Text>Artiste : {music.artistName}</Text>
+                        <Text>Album : {music.collectionName}</Text>
+                        <Text>Type : {music.kind}</Text>
+                        <Text>-----------------------</Text>
+                    </View>
+                ))}
+            </ScrollView>
+        </SafeAreaView>
     );
 }
 
@@ -42,17 +44,5 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         padding: 10,
-    },
-    header: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    songItem: {
-        padding: 10,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        marginBottom: 10,
-        borderRadius: 5,
     },
 });
