@@ -1,10 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import MusicDetails from '../components/MusicDetails';
 
-export default function SongDetailsScreen() {
+export default function SongDetailsScreen({ route }) {
+    const { music } = route.params;
+
     return (
         <View style={styles.container}>
-            <Text>Song Details Screen</Text>
+            <MusicDetails music={music} />
         </View>
     );
 }
@@ -12,8 +15,8 @@ export default function SongDetailsScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
         backgroundColor: 'white',
+        alignItems: 'center',
         justifyContent: 'center',
     },
 });
