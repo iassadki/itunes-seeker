@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
-import HomeScreen from './HomeScreen';
+import { View, Text, StyleSheet, Button, SafeAreaView, ScrollView } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import MusicItem from '../components/MusicItem';
 
@@ -9,7 +8,7 @@ export default function SearchScreen({ navigation }) {
     const [musicList, setMusicList] = useState([]); // Initialiser l'état musicList avec un tableau vide
 
     // Cette fonction gère la recherche de musique en fonction de la phrase de recherche
-    async function handleSearch() {
+    const handleSearch = async () => {
         try {
             const response = await fetch(`https://itunes.apple.com/search?media=music&term=${searchPhrase}`);
             const data = await response.json();
@@ -18,6 +17,22 @@ export default function SearchScreen({ navigation }) {
             console.error(error);
         }
     };
+
+    // Utilisation de useEffect pour appeler handleSearch lorsque searchPhrase change
+    useEffect(() => {
+        // Vérifier si la phrase de recherche n'est pas vide
+        if (searchPhrase.trim() !== '') {
+            // Exécuter handleSearch après un délai de 1500 millisecondes
+            setTimeout(() => {
+                handleSearch();
+            }, 1500);
+        }
+    }, [searchPhrase]);
+
+
+    // setTimeout(() => {
+    //  fetchMusic();
+    // }, 500);
 
     // Fonction pour gérer la navigation vers la page de détails de la musique
     const handlePress = (music) => {
@@ -29,11 +44,12 @@ export default function SearchScreen({ navigation }) {
             <SearchBar
                 searchPhrase={searchPhrase}
                 setSearchPhrase={setSearchPhrase}
+                onChangeText={searchPhrase => setSearchPhrase(searchPhrase)}
             />
-            <Button
+            {/* <Button
                 title='Rechercher'
                 onPress={handleSearch}
-            />
+            /> */}
             <SafeAreaView style={styles.container}>
                 <ScrollView>
                     {musicList.map((music, index) => (
