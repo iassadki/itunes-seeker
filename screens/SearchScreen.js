@@ -29,7 +29,6 @@ export default function SearchScreen({ navigation }) {
         }
     }, [searchPhrase]);
 
-
     // setTimeout(() => {
     //  fetchMusic();
     // }, 500);

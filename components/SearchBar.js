@@ -4,7 +4,7 @@ import { Feather } from "@expo/vector-icons";
 
 const SearchBar = ({ searchPhrase, setSearchPhrase }) => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-    const [searchOption, setSearchOption] = useState("Track");
+    const [searchOption, setSearchOption] = useState(''); // Initialiser l'état searchOption avec une chaîne vide
 
     const toggleDropdown = () => {
         setIsDropdownVisible(!isDropdownVisible);
@@ -12,6 +12,7 @@ const SearchBar = ({ searchPhrase, setSearchPhrase }) => {
 
     const handleOptionSelect = (option) => {
         setSearchOption(option);
+        setSearchPhrase(searchPhrase); // Garder la phrase de recherche inchangée pour afficher la recherche actuelle
         toggleDropdown();
     };
 
@@ -34,7 +35,12 @@ const SearchBar = ({ searchPhrase, setSearchPhrase }) => {
                 />
                 {/* Dropdown button */}
                 <TouchableOpacity onPress={toggleDropdown}>
-                    <Text style={styles.dropdownButton}>{searchOption}</Text>
+                    <Feather
+                        name="chevron-down"
+                        size={20}
+                        color="black"
+                        style={{ marginLeft: 1 }}
+                    />
                 </TouchableOpacity>
             </View>
             {/* Dropdown menu */}
@@ -48,6 +54,12 @@ const SearchBar = ({ searchPhrase, setSearchPhrase }) => {
                     </TouchableOpacity>
                 </View>
             )}
+            {/* Afficher l'option sélectionnée à côté de la barre de recherche */}
+            {searchOption !== '' && (
+                <View style={styles.selectedOption}>
+                    <Text>{searchOption}</Text>
+                </View>
+            )}
         </View>
     );
 };
@@ -55,6 +67,7 @@ const SearchBar = ({ searchPhrase, setSearchPhrase }) => {
 const styles = StyleSheet.create({
     container: {
         margin: 15,
+        marginBottom: 40,
         justifyContent: "flex-start",
         alignItems: "center",
         width: "90%",
@@ -72,18 +85,15 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         width: "70%",
     },
-    dropdownButton: {
-        fontSize: 16,
-        fontWeight: "bold",
-        marginLeft: 10,
-        marginRight: 10,
-    },
     dropdown: {
         position: "absolute",
-        top: 70,
-        right: 10,
+        top: 30,
+        right: 0,
         backgroundColor: "#d9dbda",
-        borderRadius: 10,
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,        
         padding: 5,
         zIndex: 1,
     },
@@ -91,6 +101,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
         padding: 5,
+    },
+    selectedOption: {
+        marginTop: 10,
+        alignItems: 'center',
     },
 });
 

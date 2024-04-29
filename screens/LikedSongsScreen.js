@@ -7,12 +7,12 @@ import MusicItem from '../components/MusicItem';
 export default function LikedSongsScreen({ route }) {
     // const [likedMusic, setLikedMusic] = useState([]);
     // const navigation = useNavigation();
-    const { likedMusic } = route.params;
+    // const { likedMusic } = route.params;
 
     // Fonction pour gérer le like
     const handleLike = (music) => {
         // Ajouter la musique à la liste des musiques aimées
-        setLikedMusic([...likedMusic, music]);
+        // setLikedMusic([...likedMusic, music]);
     };
 
     return (
@@ -20,7 +20,7 @@ export default function LikedSongsScreen({ route }) {
             <ScrollView>
                 <Text style={styles.pageTitle}>Liked Songs</Text>
                 {/* <TouchableOpacity style={styles.music} onPress={() => handleLike(likedMusic)}> */}
-                    <MusicItem music={likedMusic} />
+                    {/* <MusicItem music={likedMusic} /> */}
                 {/* </TouchableOpacity> */}
             </ScrollView>
         </SafeAreaView>
