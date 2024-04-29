@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { Feather } from '@expo/vector-icons'; // Importation de Feather pour utiliser les icônes
+import { FontAwesome } from '@expo/vector-icons';
 
 const MusicDetails = ({ music }) => {
-    const handleLike = () => {
-        // Logique pour gérer le like
+
+    // Initialiser l'état liked de la musique
+    const [musicList, setMusicList] = useState([]);
+
+    // Fonction pour gérer le like
+    const handleLike = (musicIndex) => {
+        // Mettre à jour l'état liked de la musique
+        setMusicList(prevMusicList => {
+            const updatedMusicList = [...prevMusicList]; // Copie de la liste de musique
+            updatedMusicList[musicIndex] = { ...updatedMusicList[musicIndex], liked: !updatedMusicList[musicIndex].liked }; // Inversion de l'état liked
+            return updatedMusicList; // Mise à jour de la liste de musique
+        });
     };
 
     return (
+        // Afficher les détails de la musique
         <View style={styles.container}>
             <Image source={{ uri: music.artworkUrl100 }} style={styles.image} />
             <View style={styles.musicDetails}>
-                <Text style={styles.textTitle}>{music.trackName}</Text>
-                <Text style={styles.text}>{music.artistName}</Text>
-                <Text style={styles.text}>{music.collectionName}</Text>
+                <Text style={styles.musicTitle}>{music.trackName}</Text>
+                <Text style={styles.musicArtist}>{music.artistName}</Text>
+                <Text style={styles.musicAlbum}>{music.collectionName}</Text>
             </View>
             <TouchableOpacity style={styles.likeButton} onPress={handleLike}>
-                <Feather name="heart" size={24} color="red" />
+                <FontAwesome name={music.liked ? 'heart' : 'heart-o'} size={30} color={music.liked ? 'red' : 'black'} />
             </TouchableOpacity>
         </View>
     );
@@ -36,11 +47,18 @@ const styles = StyleSheet.create({
     musicDetails: {
         marginTop: 10,
         marginLeft: 5,
-        // alignItems: 'center',
     },
-    textTitle: {
-        fontSize: 30,
+    musicTitle: {
+        fontSize: 20,
         fontWeight: 'bold',
+    },
+    musicArtist: {
+        fontSize: 15,
+        fontWeight: '500',
+    },
+    musicAlbum: {
+        fontSize: 15,
+        fontWeight: '400',
     },
     text: {
         fontSize: 20,

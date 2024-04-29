@@ -1,32 +1,17 @@
-// LikedSongsScreen.js
-import React from 'react';
-import { Feather } from '@expo/vector-icons';
-import { View, Text, StyleSheet, FlatList, SafeAreaView, TouchableOpacity, ScrollView, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Text, StyleSheet, SafeAreaView, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import MusicDetails from '../components/MusicDetails';
+import MusicItem from '../components/MusicItem';
 
-export default function LikedSongsScreen() {
-    const [musicList, setMusicList] = useState([]);
-    const [likedMusic, setLikedMusic] = useState([]);
-    const navigation = useNavigation();
+export default function LikedSongsScreen({ route }) {
+    // const [likedMusic, setLikedMusic] = useState([]);
+    // const navigation = useNavigation();
+    const { likedMusic } = route.params;
 
-    useEffect(() => {
-        const fetchMusic = async () => {
-            try {
-                // search music
-                const response = await fetch('https://itunes.apple.com/search?media=music&term=thylacine');
-                const data = await response.json();
-                setMusicList(data.results);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        // Appel de la fonction fetchMusic pour récupérer les musiques
-        fetchMusic();
-    }, []);
-
+    // Fonction pour gérer le like
     const handleLike = (music) => {
+        // Ajouter la musique à la liste des musiques aimées
         setLikedMusic([...likedMusic, music]);
     };
 
@@ -34,19 +19,9 @@ export default function LikedSongsScreen() {
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 <Text style={styles.pageTitle}>Liked Songs</Text>
-                {musicList.map((music, index) => (
-                    <TouchableOpacity key={index} style={styles.music} onPress={() => navigation.navigate('SongDetailsScreen', { music })}>
-                        <Image source={{ uri: music.artworkUrl100 }} style={styles.image} />
-                        <View style={styles.musicDetails}>
-                            <Text style={styles.text}>{music.trackName}</Text>
-                            <Text style={styles.text}>{music.artistName}</Text>
-                            <Text style={styles.text}>{music.collectionName}</Text>
-                        </View>
-                        <TouchableOpacity style={styles.likeButton} onPress={() => handleLike(music)}>
-                            <Feather name="heart" size={24} color="red" />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
-                ))}
+                {/* <TouchableOpacity style={styles.music} onPress={() => handleLike(likedMusic)}> */}
+                    <MusicItem music={likedMusic} />
+                {/* </TouchableOpacity> */}
             </ScrollView>
         </SafeAreaView>
     );
