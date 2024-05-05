@@ -5,14 +5,31 @@ import MusicItem from '../components/MusicItem';
 
 export default function SearchScreen({ navigation }) {
     const [searchPhrase, setSearchPhrase] = useState(''); // Initialiser l'état searchPhrase avec une chaîne vide
+    const [artistList, setartistList] = useState([]); // Initialiser l'état de artistList avec un tableau vide
     const [musicList, setMusicList] = useState([]); // Initialiser l'état musicList avec un tableau vide
+    const [searchOption, setSearchOption] = useState(''); //? Initialiser l'état searchOption (de SearchBar.js) avec une chaîne vide
+
+    //* recherche par artiste
+    //* entity=allArtist&attribute=allArtistTerm&term=maroon
 
     // Cette fonction gère la recherche de musique en fonction de la phrase de recherche
     const handleSearch = async () => {
         try {
-            const response = await fetch(`https://itunes.apple.com/search?media=music&term=${searchPhrase}`);
-            const data = await response.json();
-            setMusicList(data.results);
+            if (searchOption === 'Artist') {
+                const response = await fetch(`https://itunes.apple.com/search?entity=allArtist&attribute=allArtistTerm&term=${searchPhrase}`); // Pour la recherche Artist
+                console.log('Artist Search');
+                const data = await response.json();
+                setartistList(data.results);
+            } else if (searchOption === 'Music') {
+                const response = await fetch(`https://itunes.apple.com/search?media=music&term=${searchPhrase}`); // Pour la recherche Music
+                console.log('Music Search');
+                const data = await response.json();
+                setMusicList(data.results);
+            }
+            // const response = await fetch(`https://itunes.apple.com/search?media=music&term=${searchPhrase}`); // Pour la recherche Music
+            // const response = await fetch(`https://itunes.apple.com/search?entity=allArtist&attribute=allArtistTerm&term=${searchPhrase}`); // Pour la recherche Artist
+            // const data = await response.json();
+            // setMusicList(data.results);
         } catch (error) {
             console.error(error);
         }
@@ -44,6 +61,8 @@ export default function SearchScreen({ navigation }) {
                 searchPhrase={searchPhrase}
                 setSearchPhrase={setSearchPhrase}
                 onChangeText={searchPhrase => setSearchPhrase(searchPhrase)}
+                searchOption={searchOption}
+                setSearchOption={setSearchOption}
             />
             {/* <Button
                 title='Rechercher'

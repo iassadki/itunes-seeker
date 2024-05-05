@@ -2,18 +2,19 @@ import React, { useState } from "react";
 import { StyleSheet, TextInput, View, TouchableOpacity, Text } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-const SearchBar = ({ searchPhrase, setSearchPhrase }) => {
-    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-    const [searchOption, setSearchOption] = useState(''); // Initialiser l'état searchOption avec une chaîne vide
+const SearchBar = ({ searchPhrase, setSearchPhrase, setSearchOption }) => {
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false); // État local pour le menu déroulant
+    const [selectedOption, setSelectedOption] = useState(null); // État local pour l'option sélectionnée
 
     const toggleDropdown = () => {
         setIsDropdownVisible(!isDropdownVisible);
     };
 
     const handleOptionSelect = (option) => {
-        setSearchOption(option);
-        setSearchPhrase(searchPhrase); // Garder la phrase de recherche inchangée pour afficher la recherche actuelle
-        toggleDropdown();
+        setSearchPhrase(searchPhrase); // Mettre à jour la phrase de recherche
+        setSearchOption(option); // Mettre à jour le searchOption
+        setSelectedOption(option); // Mettre à jour l'option sélectionnée
+        toggleDropdown(); // Fermer le menu déroulant
     };
 
     return (
@@ -46,20 +47,16 @@ const SearchBar = ({ searchPhrase, setSearchPhrase }) => {
             {/* Dropdown menu */}
             {isDropdownVisible && (
                 <View style={styles.dropdown}>
-                    <TouchableOpacity onPress={() => handleOptionSelect("Track")}>
-                        <Text style={styles.dropdownItem}>Track</Text>
+                    <TouchableOpacity onPress={() => handleOptionSelect("Music")}>
+                        <Text style={[styles.dropdownItem, selectedOption === "Music" && styles.selectedItem]}>Music</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => handleOptionSelect("Artist")}>
-                        <Text style={styles.dropdownItem}>Artist</Text>
+                        <Text style={[styles.dropdownItem, selectedOption === "Artist" && styles.selectedItem]}>Artist</Text>
                     </TouchableOpacity>
                 </View>
             )}
-            {/* Afficher l'option sélectionnée à côté de la barre de recherche */}
-            {searchOption !== '' && (
-                <View style={styles.selectedOption}>
-                    <Text>{searchOption}</Text>
-                </View>
-            )}
+            {/* Trait vertical */}
+            <View style={styles.verticalLine}></View>
         </View>
     );
 };
@@ -67,7 +64,7 @@ const SearchBar = ({ searchPhrase, setSearchPhrase }) => {
 const styles = StyleSheet.create({
     container: {
         margin: 15,
-        marginBottom: 40,
+        marginBottom: 70,
         justifyContent: "flex-start",
         alignItems: "center",
         width: "90%",
@@ -88,23 +85,31 @@ const styles = StyleSheet.create({
     dropdown: {
         position: "absolute",
         top: 30,
-        right: 0,
+        right: 0.2,
+        width: "30%",
         backgroundColor: "#d9dbda",
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
         borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,        
+        borderBottomRightRadius: 10,
         padding: 5,
-        zIndex: 1,
+        // zIndex: 9999,
     },
     dropdownItem: {
         fontSize: 16,
         fontWeight: "bold",
         padding: 5,
     },
-    selectedOption: {
-        marginTop: 10,
-        alignItems: 'center',
+    selectedItem: {
+        backgroundColor: "lightblue", // Couleur de fond différente pour l'option sélectionnée
+    },
+    verticalLine: {
+        height: "100%",
+        width: 1,
+        backgroundColor: "black",
+        position: "absolute",
+        right: "30%",
+        top: 0,
     },
 });
 
