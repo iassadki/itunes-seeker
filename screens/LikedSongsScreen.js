@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Text, StyleSheet, SafeAreaView, ScrollView, Image, TouchableOpacity } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import MusicDetails from '../components/MusicDetails';
+import { Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import MusicItem from '../components/MusicItem';
 
 export default function LikedSongsScreen({ route }) {
-    // const [likedMusic, setLikedMusic] = useState([]);
-    // const navigation = useNavigation();
-    // const { likedMusic } = route.params;
+    const [likedSongs, setLikedSongs] = useState([]);
 
-    // Fonction pour gérer le like
-    const handleLike = (music) => {
-        // Ajouter la musique à la liste des musiques aimées
-        // setLikedMusic([...likedMusic, music]);
-    };
+    // useEffect(() => {
+    // 
+    // }, []); // Aucune dépendance pour que cela ne se déclenche qu'une seule fois
 
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 <Text style={styles.pageTitle}>Liked Songs</Text>
-                {/* <TouchableOpacity style={styles.music} onPress={() => handleLike(likedMusic)}> */}
-                    {/* <MusicItem music={likedMusic} /> */}
-                {/* </TouchableOpacity> */}
+                {likedSongs.map((music, index) => (
+                    <MusicItem
+                        key={index}
+                        music={music}
+                        onPress={() => { }}
+                        onLike={() => { }}
+                    />
+                ))}
             </ScrollView>
         </SafeAreaView>
     );
@@ -39,32 +38,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginVertical: 10,
     },
-    music: {
-        margin: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        marginVertical: 5,
-        borderRadius: 5,
-    },
-    image: {
-        width: 100,
-        height: 100,
-        margin: 10,
-        borderRadius: 5,
-    },
-    musicDetails: {
-        flex: 1,
-        marginLeft: 10,
-    },
-    text: {
-        fontSize: 14,
-        fontWeight: '500',
-    },
-    likeButton: {
-        position: 'absolute',
-        top: 10,
-        right: 10,
-    }
 });

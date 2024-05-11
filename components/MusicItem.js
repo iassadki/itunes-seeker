@@ -13,9 +13,9 @@ const MusicItem = ({ music, onPress, onLike }) => {
                 <Text style={styles.musicAlbum}>{music.collectionName}</Text>
             </View>
             <View style={styles.containerlikeButton}>
-            <TouchableOpacity style={styles.likeButton} onPress={onLike}>
-                <FontAwesome name={music.liked ? 'heart' : 'heart-o'} size={30} color={music.liked ? 'red' : 'black'} />
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.likeButton} onPress={onLike}>
+                    <FontAwesome name={music.liked ? 'heart' : 'heart-o'} size={30} color={music.liked ? 'red' : 'black'} />
+                </TouchableOpacity>
             </View>
         </TouchableOpacity>
     );
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: '500',
     },
-    musicAlbum : {
+    musicAlbum: {
         fontSize: 15,
         fontWeight: '400',
     },
