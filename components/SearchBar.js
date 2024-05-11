@@ -47,11 +47,11 @@ const SearchBar = ({ searchPhrase, setSearchPhrase, setSearchOption }) => {
             {/* Dropdown menu */}
             {isDropdownVisible && (
                 <View style={styles.dropdown}>
-                    <TouchableOpacity onPress={() => handleOptionSelect("Music")}>
-                        <Text style={[styles.dropdownItem, selectedOption === "Music" && styles.selectedItem]}>Music</Text>
-                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => handleOptionSelect("Artist")}>
                         <Text style={[styles.dropdownItem, selectedOption === "Artist" && styles.selectedItem]}>Artist</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => handleOptionSelect("Music")}>
+                        <Text style={[styles.dropdownItem, selectedOption === "Music" && styles.selectedItem]}>Music</Text>
                     </TouchableOpacity>
                 </View>
             )}

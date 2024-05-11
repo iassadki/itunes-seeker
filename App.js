@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen.js';
 import LikedSongsScreen from './screens/LikedSongsScreen';
 import SearchScreen from './screens/SearchScreen';
 import SongDetailsScreen from './screens/SongDetailsScreen.js';
+import ArtistDetailsScreen from './screens/ArtistDetailsScreen.js';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
@@ -33,6 +34,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreenNavigator} options={{ headerShown: false }} />
         <Stack.Screen name="SongDetailsScreen" component={SongDetailsScreen} />
+        <Stack.Screen name="ArtistDetailsScreen" component={ArtistDetailsScreen} />
         <Stack.Screen name="LikedSongsScreen" component={LikedSongsScreen} />
       </Stack.Navigator>
     </NavigationContainer>

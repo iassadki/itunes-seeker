@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import MusicDetails from '../components/MusicDetails';
+import ArtistDetails from '../components/ArtistDetails';
 
-export default function SongDetailsScreen({ route }) {
-    const { music } = route.params; // Extraire la musique de la route
+export default function ArtistDetailsScreen({ route }) {
+    const { artist } = route.params; // Extraire l'artiste de la route
 
     return (
-        // Afficher les détails de la musique
+        // Afficher les détails de l'artiste
         <View style={styles.container}>
-            <MusicDetails music={music} />
+            <ArtistDetails artist={artist} />
         </View>
     );
 }

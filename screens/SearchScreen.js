@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import MusicItem from '../components/MusicItem';
+import ArtistItem from '../components/ArtistItem';
 
 export default function SearchScreen({ navigation }) {
     const [searchPhrase, setSearchPhrase] = useState(''); // Initialiser l'état searchPhrase avec une chaîne vide
@@ -40,9 +41,13 @@ export default function SearchScreen({ navigation }) {
         setSearchPhrase(''); // Réinitialiser la phrase de recherche lorsque l'option de recherche est changée
     };
 
-    const handlePress = (music) => {
+    const handlePressArtist = (artist) => { 
+        navigation.navigate('ArtistDetailsScreen', { artist });
+    }
+
+    const handlePressMusic = (music) => {
         navigation.navigate('SongDetailsScreen', { music });
-    };
+    }
 
     return (
         <View style={styles.container}>
@@ -56,17 +61,17 @@ export default function SearchScreen({ navigation }) {
             <SafeAreaView style={styles.container}>
                 <ScrollView>
                     {searchOption === 'Artist' && artistList.map((artist, index) => (
-                        <MusicItem
+                        <ArtistItem
                             key={index}
-                            music={artist}
-                            onPress={() => handlePress(artist)}
+                            artist={artist}
+                            onPress={() => handlePressArtist(artist)}
                         />
                     ))}
                     {searchOption === 'Music' && musicList.map((music, index) => (
                         <MusicItem
                             key={index}
                             music={music}
-                            onPress={() => handlePress(music)}
+                            onPress={() => handlePressMusic(music)}
                         />
                     ))}
                 </ScrollView>
