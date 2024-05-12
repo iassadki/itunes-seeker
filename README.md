@@ -4,7 +4,6 @@
 Application using the iTunes API to search for music, albums, etc. Users can also like their favourite tracks.
 
 ## ⚙️ Functionalities
-
 [x] Search for artists
 [ ] Search for artists trackName
 [x] Display of a selectable list of items
