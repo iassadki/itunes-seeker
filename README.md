@@ -12,9 +12,9 @@ Application using the iTunes API to search for music, albums, etc. Users can als
 - [ ] Personalized Rating system (reducer dans le store, pour le système de notation, conservable quand on ferme l’app. Avec le store et redux c’est simple)
 
 ## 🛠 Technologies
-- Languages : JavaScript
-- Framework : React-Native
-- Tools : Expo
+- Languages : `JavaScript`
+- Framework : `React-Native`
+- Tools : `Expo`
 
 ## 🧭 Running the application
 1. Install the dependencies
