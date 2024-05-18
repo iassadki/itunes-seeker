@@ -26,9 +26,9 @@ const MusicDetails = ({ music }) => {
                 <Text style={styles.musicArtist}>{music.artistName}</Text>
                 <Text style={styles.musicAlbum}>{music.collectionName}</Text>
             </View>
-            <TouchableOpacity style={styles.likeButton} onPress={handleLike}>
+            {/* <TouchableOpacity style={styles.likeButton} onPress={handleLike}>
                 <FontAwesome name={music.liked ? 'heart' : 'heart-o'} size={30} color={music.liked ? 'red' : 'black'} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
     );
 };

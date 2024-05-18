@@ -41,8 +41,6 @@ export default function HomeScreen({ navigation }) {
         });
     };
 
-
-
     // Handle navigation to song details page
     const handlePress = (music) => {
         navigation.navigate('SongDetailsScreen', { music });

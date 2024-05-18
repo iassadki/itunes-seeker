@@ -9,6 +9,7 @@ import SearchScreen from './screens/SearchScreen';
 import SongDetailsScreen from './screens/SongDetailsScreen.js';
 import ArtistDetailsScreen from './screens/ArtistDetailsScreen.js';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Provider } from 'react-redux';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
