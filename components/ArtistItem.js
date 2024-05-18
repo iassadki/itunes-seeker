@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderWidth: 1,
-        borderColor: 'lightgray',
+        borderColor: '#424242',
         marginVertical: 5,
         borderRadius: 5,
     },
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     artistArtist: {
         fontSize: 15,
         fontWeight: '700', 
+        color: '#DCDCDC',
     },
     likeButton: {
         position: 'absolute',

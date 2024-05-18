@@ -29,13 +29,15 @@ export default function LikedSongsScreen({ route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#121212',
         padding: 10,
     },
     pageTitle: {
-        margin: 10,
-        fontSize: 20,
+        marginTop: 30,
+        marginLeft: 10,
+        fontSize: 25,
         fontWeight: 'bold',
         marginVertical: 10,
+        color: 'white',
     },
 });

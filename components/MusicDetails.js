@@ -51,18 +51,17 @@ const styles = StyleSheet.create({
     musicTitle: {
         fontSize: 20,
         fontWeight: 'bold',
+        color: '#DCDCDC',
     },
     musicArtist: {
         fontSize: 15,
         fontWeight: '500',
+        color: '#B9B9B9',
     },
     musicAlbum: {
         fontSize: 15,
         fontWeight: '400',
-    },
-    text: {
-        fontSize: 20,
-        fontWeight: '400',
+        color: '#B9B9B9',
     },
     likeButton: {
         marginTop: 10,

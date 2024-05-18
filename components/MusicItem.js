@@ -14,7 +14,7 @@ const MusicItem = ({ music, onPress, onLike }) => {
             </View>
             <View style={styles.containerlikeButton}>
                 <TouchableOpacity style={styles.likeButton} onPress={onLike}>
-                    <FontAwesome name={music.liked ? 'heart' : 'heart-o'} size={30} color={music.liked ? 'red' : 'black'} />
+                    <FontAwesome name={music.liked ? 'heart' : 'heart-o'} size={30} color={music.liked ? 'red' : 'grey'} />
                 </TouchableOpacity>
             </View>
         </TouchableOpacity>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderWidth: 1,
-        borderColor: 'lightgray',
+        borderColor: '#424242',
         marginVertical: 5,
         borderRadius: 5,
     },
@@ -40,20 +40,24 @@ const styles = StyleSheet.create({
     musicTitle: {
         fontSize: 15,
         fontWeight: 'bold',
+        color: '#DCDCDC',
     },
     musicArtist: {
         fontSize: 15,
         fontWeight: '500',
+        color: '#B9B9B9',
     },
     musicAlbum: {
         fontSize: 15,
         fontWeight: '400',
+        color: '#B9B9B9',
     },
     musicDetails: {
         fontSize: 15,
         flex: 1,
         marginLeft: 10,
         fontWeight: '500',
+        color: '#B9B9B9',
     },
     containerlikeButton: {
         // flex: 1,
@@ -62,6 +66,7 @@ const styles = StyleSheet.create({
     likeButton: {
         marginLeft: 20,
         width: 50,
+        borderColor: '#424242',
     }
 });
 

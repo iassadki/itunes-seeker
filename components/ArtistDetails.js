@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     artistArtist: {
         fontSize: 23,
         fontWeight: '600',
+        color: '#DCDCDC',
     },
 });
 

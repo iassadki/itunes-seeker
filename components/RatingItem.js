@@ -32,12 +32,12 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
         borderWidth: 1,
-        borderColor: 'black',
+        borderColor: '#424242',
         borderRadius: 15,
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         margin: 10,
     },
     filledDot: {
-        backgroundColor: 'black',
+        backgroundColor: '#979797',
     },
 });

@@ -4,9 +4,7 @@ import MusicItem from '../components/MusicItem';
 import MusicDetails from '../components/MusicDetails';
 
 export default function HomeScreen({ navigation }) {
-
-    // Initialize musicList with an empty array
-    const [musicList, setMusicList] = useState([]);
+    const [musicList, setMusicList] = useState([]); // Add state for music list
     const [likedSongs, setLikedSongs] = useState([]); // Add state for liked songs
 
     // Fetch music list from iTunes API
@@ -66,13 +64,15 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#121212',
         padding: 10,
     },
     pageTitle: {
-        margin: 10,
-        fontSize: 20,
+        marginTop: 30,
+        marginLeft: 10,
+        fontSize: 25,
         fontWeight: 'bold',
         marginVertical: 10,
+        color: 'white',
     },
 });

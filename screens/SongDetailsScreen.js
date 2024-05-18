@@ -29,7 +29,7 @@ const SongDetailsScreen = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#121212',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         textAlign: 'left',
         width: '100%',
+        color: '#DCDCDC',
     },
     ratingItemContainer: {
         position: 'absolute',
