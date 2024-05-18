@@ -1,9 +1,9 @@
 # itunes-seeker
 
-![itunes-seeker-1](https://github.com/iassadki/itunes-seeker/blob/master/itunes-seeker-1.png?raw=true)
-![itunes-seeker-2](https://github.com/iassadki/itunes-seeker/blob/master/itunes-seeker-2.png?raw=true)
-![itunes-seeker-3](https://github.com/iassadki/itunes-seeker/blob/master/itunes-seeker-3.png?raw=true)
-![itunes-seeker-4](https://github.com/iassadki/itunes-seeker/blob/master/itunes-seeker-4.png?raw=true)
+![itunes-seeker-1](https://github.com/iassadki/itunes-seeker/blob/master/git/itunes-seeker-1.png?raw=true)
+![itunes-seeker-2](https://github.com/iassadki/itunes-seeker/blob/master/git/itunes-seeker-2.png?raw=true)
+![itunes-seeker-3](https://github.com/iassadki/itunes-seeker/blob/master/git/itunes-seeker-3.png?raw=true)
+![itunes-seeker-4](https://github.com/iassadki/itunes-seeker/blob/master/git/itunes-seeker-4.png?raw=true)
 
 ## 💻 About the project
 Application using the iTunes API to search for music, albums, etc. Users can also like their favourite tracks.
