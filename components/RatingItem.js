@@ -3,7 +3,7 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { setRating, ratingSelector } from '../redux/ratingSlice';
+import { setRating, ratingSelector } from '../redux/rating/ratingSlice';
 
 export default function RatingItem({ musicId }) {
     const dispatch = useDispatch(); // Utilisez useDispatch pour envoyer l'action setRating

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 const MusicItem = ({ music, onPress, onLike }) => {
+
     return (
-        // Afficher les détails de la musique
         <TouchableOpacity style={styles.music} onPress={onPress}>
             <Image source={{ uri: music.artworkUrl100 }} style={styles.image} />
             <View style={styles.musicDetails}>
@@ -13,8 +13,8 @@ const MusicItem = ({ music, onPress, onLike }) => {
                 <Text style={styles.musicAlbum}>{music.collectionName}</Text>
             </View>
             <View style={styles.containerlikeButton}>
-                <TouchableOpacity style={styles.likeButton} onPress={onLike}>
-                    <FontAwesome name={music.liked ? 'heart' : 'heart-o'} size={30} color={music.liked ? 'red' : 'grey'} />
+                <TouchableOpacity style={styles.likeButton} onPress={() => onLike(music)}>
+                    <FontAwesome name="heart" size={24} color={music.liked ? 'red' : '#424242'} />
                 </TouchableOpacity>
             </View>
         </TouchableOpacity>
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
         color: '#B9B9B9',
     },
     containerlikeButton: {
-        // flex: 1,
         alignItems: 'flex-end',
     },
     likeButton: {

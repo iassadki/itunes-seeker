@@ -1,5 +1,3 @@
-// ratingSlice.js
-
 import { createSlice } from "@reduxjs/toolkit";
 
 const ratingSlice = createSlice({

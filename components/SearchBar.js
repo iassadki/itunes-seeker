@@ -64,6 +64,7 @@ const SearchBar = ({ searchPhrase, setSearchPhrase, setSearchOption }) => {
 const styles = StyleSheet.create({
     container: {
         margin: 15,
+        marginTop: 40,
         marginBottom: 70,
         justifyContent: "flex-start",
         alignItems: "center",

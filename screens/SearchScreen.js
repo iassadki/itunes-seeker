@@ -37,14 +37,19 @@ export default function SearchScreen({ navigation }) {
         }
     };
 
+    // Fonction pour gérer le clic sur le bouton de like
     const handleLike = (music) => {
+        // Mettre à jour l'état musicList pour ajouter ou supprimer la musique aimée
         setMusicList(prevMusicList => {
             const updatedMusicList = [...prevMusicList];
             const index = updatedMusicList.findIndex(item => item.trackId === music.trackId);
+            // Si la musique est trouvée, mettre à jour l'état liked et ajouter ou supprimer la musique de la liste des chansons aimées
             if (index !== -1) {
                 updatedMusicList[index] = { ...updatedMusicList[index], liked: !updatedMusicList[index].liked };
+                // Mettre à jour l'état likedSongs pour ajouter ou supprimer la musique aimée
                 if (updatedMusicList[index].liked) {
                     setLikedSongs(prevLikedSongs => [...prevLikedSongs, updatedMusicList[index]]);
+                // Si la musique est déjà aimée, la retirer de la liste des chansons aimées
                 } else {
                     setLikedSongs(prevLikedSongs => prevLikedSongs.filter(song => song.trackId !== music.trackId));
                 }
@@ -102,7 +107,7 @@ export default function SearchScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#121212',
+        backgroundColor: 'black',
         padding: 10,
     },
     searchFilter: {
