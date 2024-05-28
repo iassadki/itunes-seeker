@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-const MusicItem = ({ music, onPress, onLike }) => {
+const MusicItem = ({ music, onPress, onLike, showTrash, showLike, onDelete }) => {
 
     return (
         <TouchableOpacity style={styles.music} onPress={onPress}>
@@ -12,10 +12,17 @@ const MusicItem = ({ music, onPress, onLike }) => {
                 <Text style={styles.musicArtist}>{music.artistName}</Text>
                 <Text style={styles.musicAlbum}>{music.collectionName}</Text>
             </View>
-            <View style={styles.containerlikeButton}>
+            <View style={styles.containerButtons}>
+                {showLike && (
                 <TouchableOpacity style={styles.likeButton} onPress={() => onLike(music)}>
                     <FontAwesome name="heart" size={24} color={music.liked ? '#D51E1E' : '#424242'} />
                 </TouchableOpacity>
+                )}
+                {showTrash && (
+                    <TouchableOpacity style={styles.trashButton} onPress={() => onDelete(music)}>
+                        <FontAwesome name="trash" size={24} color='#D51E1E' />
+                    </TouchableOpacity>
+                )}
             </View>
         </TouchableOpacity>
     );
@@ -59,14 +66,22 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         color: '#B9B9B9',
     },
-    containerlikeButton: {
-        alignItems: 'flex-end',
+    containerButtons: {
+        // container avec deux boutons
+        flexDirection: 'row',
+        // regler la marge entre les deux, plus faible que la marge entre les boutons et le texte
+        marginRight: 1,
     },
     likeButton: {
         marginLeft: 20,
         width: 50,
         borderColor: '#424242',
-    }
+    }, 
+    trashButton: {
+        marginLeft: 5,
+        width: 50,
+        borderColor: '#424242',
+    },
 });
 
 export default MusicItem;

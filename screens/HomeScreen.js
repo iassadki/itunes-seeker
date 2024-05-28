@@ -69,6 +69,8 @@ export default function HomeScreen({ navigation }) {
                         music={music}
                         onPress={() => handlePress(music)}
                         onLike={() => handleLike(music)}
+                        showLike={true}
+                        showTrash={false}
                     />
                 ))}
                 <Button

@@ -23,6 +23,18 @@ export default function LikedSongsScreen({ navigation, props }) {
         navigation.navigate('SongDetailsScreen', { music }); // Naviguer vers l'écran de détails de la chanson lors du clic sur une chanson
     };
 
+    // methode handleDelete, pour supprimer une muqique de la liste des chansons aimées quand on clique sur le bouton
+    const handleDelete = async (music) => {
+        // Récupérer la liste actuelle des chansons aimées
+        const likedSongsString = await AsyncStorage.getItem('likedSongs');
+        const likedSongs = likedSongsString ? JSON.parse(likedSongsString) : [];
+
+        // Mettre à jour l'état likedSongs pour supprimer la musique aimée
+        const updatedLikedSongs = likedSongs.filter(item => item.trackId !== music.trackId);
+        AsyncStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs)); // Stocker les chansons aimées dans AsyncStorage
+        setLikedSongs(updatedLikedSongs);
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
@@ -32,8 +44,10 @@ export default function LikedSongsScreen({ navigation, props }) {
                         key={index}
                         music={music}
                         onPress={() => handlePress(music)}
-                        onLike={() => { }}
+                        onDelete={() => handleDelete(music)}
                         liked={true}
+                        showLike={false}
+                        showTrash={true}
                     />
                 ))}
             </ScrollView>

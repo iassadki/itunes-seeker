@@ -9,7 +9,7 @@ export default function SearchScreen({ navigation }) {
     const [searchPhrase, setSearchPhrase] = useState(''); // Initialiser l'état searchPhrase avec une chaîne vide
     const [artistList, setArtistList] = useState([]); // Initialiser l'état de artistList avec un tableau vide
     const [musicList, setMusicList] = useState([]); // Initialiser l'état musicList avec un tableau vide
-    const [searchOption, setSearchOption] = useState('Artist'); // Initialiser l'état searchOption avec la valeur par défaut 'Artist'
+    const [searchOption, setSearchOption] = useState('Music'); // Initialiser l'état searchOption avec la valeur par défaut 'Artist'
     const [likedSongs, setLikedSongs] = useState([]); // Ajout d'un état pour les chansons aimées
 
     useEffect(() => {
@@ -103,6 +103,8 @@ export default function SearchScreen({ navigation }) {
                             music={music}
                             onPress={() => handlePressMusic(music)}
                             onLike={() => handleLike(music)}
+                            showLike={true}
+                            showTrash={false}
                         />
                     ))}
                 </ScrollView>
