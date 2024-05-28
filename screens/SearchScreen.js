@@ -3,13 +3,14 @@ import { View, StyleSheet, SafeAreaView, ScrollView, Text } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import MusicItem from '../components/MusicItem';
 import ArtistItem from '../components/ArtistItem';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SearchScreen({ navigation }) {
     const [searchPhrase, setSearchPhrase] = useState(''); // Initialiser l'état searchPhrase avec une chaîne vide
     const [artistList, setArtistList] = useState([]); // Initialiser l'état de artistList avec un tableau vide
     const [musicList, setMusicList] = useState([]); // Initialiser l'état musicList avec un tableau vide
     const [searchOption, setSearchOption] = useState('Artist'); // Initialiser l'état searchOption avec la valeur par défaut 'Artist'
-    const [likedSongs, setLikedSongs] = useState([]); // Add state for liked songs
+    const [likedSongs, setLikedSongs] = useState([]); // Ajout d'un état pour les chansons aimées
 
     useEffect(() => {
         if (searchPhrase.trim() !== '') {
@@ -38,24 +39,30 @@ export default function SearchScreen({ navigation }) {
     };
 
     // Fonction pour gérer le clic sur le bouton de like
-    const handleLike = (music) => {
-        // Mettre à jour l'état musicList pour ajouter ou supprimer la musique aimée
-        setMusicList(prevMusicList => {
-            const updatedMusicList = [...prevMusicList];
-            const index = updatedMusicList.findIndex(item => item.trackId === music.trackId);
-            // Si la musique est trouvée, mettre à jour l'état liked et ajouter ou supprimer la musique de la liste des chansons aimées
-            if (index !== -1) {
-                updatedMusicList[index] = { ...updatedMusicList[index], liked: !updatedMusicList[index].liked };
-                // Mettre à jour l'état likedSongs pour ajouter ou supprimer la musique aimée
-                if (updatedMusicList[index].liked) {
-                    setLikedSongs(prevLikedSongs => [...prevLikedSongs, updatedMusicList[index]]);
-                // Si la musique est déjà aimée, la retirer de la liste des chansons aimées
-                } else {
-                    setLikedSongs(prevLikedSongs => prevLikedSongs.filter(song => song.trackId !== music.trackId));
-                }
-            }
-            return updatedMusicList;
-        });
+    const handleLike = async (music) => {
+        // Mettre à jour l'état de la musique likée
+        const updatedMusicList = musicList.map(item =>
+            item.trackId === music.trackId ? { ...item, liked: !item.liked } : item
+        );
+        setMusicList(updatedMusicList);
+
+        // Récupérer la liste actuelle des chansons aimées
+        const likedSongsString = await AsyncStorage.getItem('likedSongs');
+        const likedSongs = likedSongsString ? JSON.parse(likedSongsString) : [];
+
+        // Vérifier si la musique est déjà aimée
+        const isLiked = likedSongs.some(item => item.trackId === music.trackId);
+
+        // Mettre à jour l'état likedSongs pour ajouter ou supprimer la musique aimée
+        if (isLiked) {
+            const updatedLikedSongs = likedSongs.filter(item => item.trackId !== music.trackId);
+            AsyncStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs)); // Stocker les chansons aimées dans AsyncStorage
+            setLikedSongs(updatedLikedSongs);
+        } else {
+            const updatedLikedSongs = [...likedSongs, { ...music, liked: true }];
+            AsyncStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs)); // Stocker les chansons aimées dans AsyncStorage
+            setLikedSongs(updatedLikedSongs);
+        }
     };
 
     const handleSearchOptionChange = (option) => {
@@ -63,7 +70,7 @@ export default function SearchScreen({ navigation }) {
         setSearchPhrase(''); // Réinitialiser la phrase de recherche lorsque l'option de recherche est changée
     };
 
-    const handlePressArtist = (artist) => { 
+    const handlePressArtist = (artist) => {
         navigation.navigate('ArtistDetailsScreen', { artist });
     }
 

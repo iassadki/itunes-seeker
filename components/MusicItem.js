@@ -14,7 +14,7 @@ const MusicItem = ({ music, onPress, onLike }) => {
             </View>
             <View style={styles.containerlikeButton}>
                 <TouchableOpacity style={styles.likeButton} onPress={() => onLike(music)}>
-                    <FontAwesome name="heart" size={24} color={music.liked ? 'red' : '#424242'} />
+                    <FontAwesome name="heart" size={24} color={music.liked ? '#D51E1E' : '#424242'} />
                 </TouchableOpacity>
             </View>
         </TouchableOpacity>

@@ -1,18 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, ScrollView, Text, StyleSheet } from 'react-native';
 import MusicItem from '../components/MusicItem';
 import { useSelector } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function LikedSongsScreen({ navigation }) {
-    // Utilisation de useSelector pour accéder à la liste des chansons aimées dans le store Redux
-    const likedSongs = useSelector(state => state.likedSongs);
+export default function LikedSongsScreen({ navigation, props }) {
+    const [likedSongs, setLikedSongs] = useState([]); // Ajout d'un état pour les chansons aimées
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            console.log("LikedSongsScreen : ", likedSongs.map(song => song.trackName));
-        }, 10000); // Actualise la fonction avec une intervalle
+        const Like = async () => {
+            const songs = await AsyncStorage.getItem('likedSongs');
 
-        return () => clearInterval(interval); // Nettoie l'intervalle lors du démontage du composant
+            if (songs !== null) {
+                setLikedSongs(JSON.parse(songs));
+            }
+        };
+
+        Like(); // Appeler la fonction Like
     }, [likedSongs]);
 
     const handlePress = (music) => {
@@ -29,6 +33,7 @@ export default function LikedSongsScreen({ navigation }) {
                         music={music}
                         onPress={() => handlePress(music)}
                         onLike={() => { }}
+                        liked={true}
                     />
                 ))}
             </ScrollView>
