@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-const ArtistItem = ({ artist, onPress, onLike }) => {
+export default function ArtistItem({ artist, onPress, onLike }) {
+    
     return (
         // Afficher les détails de l'artiste
         <TouchableOpacity style={styles.artist} onPress={onPress}>
@@ -41,5 +42,3 @@ const styles = StyleSheet.create({
         right: 10,
     },
 });
-
-export default ArtistItem;

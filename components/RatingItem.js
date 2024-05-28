@@ -1,5 +1,3 @@
-// RatingItem.js
-
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';

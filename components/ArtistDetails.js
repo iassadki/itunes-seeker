@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const ArtistDetails = ({ artist }) => {
+export default function ArtistDetails({ artist }) {
+    
     return (
         // Afficher les détails de l'artiste
         <View style={styles.container}>
@@ -34,4 +35,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ArtistDetails;
+// export default ArtistDetails;

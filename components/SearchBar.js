@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, TextInput, View, TouchableOpacity, Text } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-const SearchBar = ({ searchPhrase, setSearchPhrase, setSearchOption }) => {
+export default function SearchBar({ searchPhrase, setSearchPhrase, setSearchOption }) {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false); // État local pour le menu déroulant
     const [selectedOption, setSelectedOption] = useState(null); // État local pour l'option sélectionnée
 
@@ -114,4 +114,3 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SearchBar;

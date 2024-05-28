@@ -1,5 +1,3 @@
-// SongDetailsScreen.js
-
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import MusicDetails from '../components/MusicDetails';
@@ -7,7 +5,7 @@ import RatingItem from '../components/RatingItem';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
 
-const SongDetailsScreen = ({ route }) => {
+export default function SongDetailsScreen({ route }) {
     const { music } = route.params; // Récupérez la musique de la route
     const musicId = music.trackId; // Récupérez l'ID de la musique
     console.log("ID de la musique:", musicId); // Affichez l'ID de la musique
@@ -51,5 +49,3 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
-
-export default SongDetailsScreen;

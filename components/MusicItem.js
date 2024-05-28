@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-const MusicItem = ({ music, onPress, onLike, showTrash, showLike, onDelete }) => {
+export default function MusicItem({ music, onPress, onLike, showTrash, showLike, onDelete }) {
 
     return (
         <TouchableOpacity style={styles.music} onPress={onPress}>
@@ -67,9 +67,7 @@ const styles = StyleSheet.create({
         color: '#B9B9B9',
     },
     containerButtons: {
-        // container avec deux boutons
         flexDirection: 'row',
-        // regler la marge entre les deux, plus faible que la marge entre les boutons et le texte
         marginRight: 1,
     },
     likeButton: {
@@ -84,4 +82,3 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MusicItem;
