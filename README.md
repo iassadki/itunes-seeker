@@ -5,7 +5,7 @@
   <img src="https://github.com/iassadki/itunes-seeker/blob/master/git/itunes-seeker-2.PNG?raw=true" alt="itunes-seeker-2" width="150"/>
   <img src="https://github.com/iassadki/itunes-seeker/blob/master/git/itunes-seeker-3.PNG?raw=true" alt="itunes-seeker-3" width="150"/>
   <img src="https://github.com/iassadki/itunes-seeker/blob/master/git/itunes-seeker-4.PNG?raw=true" alt="itunes-seeker-4" width="150"/>
-  <img src="https://github.com/iassadki/itunes-seeker/blob/master/git/itunes-seeker-4.PNG?raw=true" alt="itunes-seeker-5" width="150"/>
+  <img src="https://github.com/iassadki/itunes-seeker/blob/master/git/itunes-seeker-5.PNG?raw=true" alt="itunes-seeker-5" width="150"/>
 </p>
 
 ## 💻 About the project
