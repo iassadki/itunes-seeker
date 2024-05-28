@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#424242',
         borderRadius: 15,
-        backgroundColor: 'black',
+        backgroundColor: '#0B0B0B',
         margin: 10,
     },
     filledDot: {

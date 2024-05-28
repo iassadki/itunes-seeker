@@ -10,7 +10,7 @@ export default function LikedSongsScreen({ navigation }) {
     useEffect(() => {
         const interval = setInterval(() => {
             console.log("LikedSongs : ", likedSongs.map(song => song.trackName));
-        }, 20000); // Actualise toutes les secondes
+        }, 10000); // Actualise toutes les secondes
 
         return () => clearInterval(interval); // Nettoie l'intervalle lors du démontage du composant
     }, [likedSongs]);
@@ -39,7 +39,7 @@ export default function LikedSongsScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: '#0B0B0B',
         padding: 10,
     },
     pageTitle: {

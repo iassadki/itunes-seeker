@@ -16,7 +16,7 @@ export default function ArtistDetailsScreen({ route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: '#0B0B0B',
         alignItems: 'center',
         justifyContent: 'center',
     },
