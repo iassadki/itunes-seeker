@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import ratingReducer from "./rating/ratingSlice";
-import likedSongsReducer from "./like/likedSongsSlice";
 
 export default configureStore({
     reducer: {
         rating: ratingReducer, // Ajouter le reducer rating
-        likedSongs: likedSongsReducer, // Ajouter le reducer likedSongs
     },
 });
 
