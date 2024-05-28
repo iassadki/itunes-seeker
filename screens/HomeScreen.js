@@ -44,7 +44,7 @@ export default function HomeScreen({ navigation }) {
 
     // Afficher les chansons aimées dans la console
     useEffect(() => {
-        console.log(likedSongs.map(song => song.trackName));
+        console.log("HomeScreen : ", likedSongs.map(song => song.trackName));
     }, [likedSongs]);
 
     return (

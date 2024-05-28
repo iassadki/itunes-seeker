@@ -18,6 +18,30 @@ Application using the iTunes API to search for music, albums, etc. Users can als
 - [ ] Possibility of adding a result to your own base (storage are optional)
 - [x] Personalized Rating system 
 
+## Fonctionnalité like
+Quand je like une musique, elle s'ajoute bien dans le tableau likedSongs (depuis la HomeScreen).
+J'ai un useEffect qui affiche en console le tableau likedSongs avec une intervalle de temps.
+```javascript
+    // Utilisation de useSelector pour accéder à la liste des chansons aimées dans le store Redux
+    const likedSongs = useSelector(state => state.likedSongs);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            console.log("LikedSongs : ", likedSongs.map(song => song.trackName));
+        }, 10000); // Actualise toutes les secondes
+
+        return () => clearInterval(interval); // Nettoie l'intervalle lors du démontage du composant
+    }, [likedSongs]);
+```
+
+En console la liste est tout le temps vide
+```shell
+ HomeScreen       :  ["Get Low", "Turn Down For What", "Slow Down"]
+ LikedSongsScreen :  []
+```
+
+Dans l'idée ça marche, mais rien ne se transfère entre les pages malgré l'utilisation de redux.
+
 ## 🛠 Technologies
 - Languages : `JavaScript`
 - Framework : `React-Native`

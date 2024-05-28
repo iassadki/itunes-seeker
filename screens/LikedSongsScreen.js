@@ -9,8 +9,8 @@ export default function LikedSongsScreen({ navigation }) {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            console.log("LikedSongs : ", likedSongs.map(song => song.trackName));
-        }, 10000); // Actualise toutes les secondes
+            console.log("LikedSongsScreen : ", likedSongs.map(song => song.trackName));
+        }, 10000); // Actualise la fonction avec une intervalle
 
         return () => clearInterval(interval); // Nettoie l'intervalle lors du démontage du composant
     }, [likedSongs]);
