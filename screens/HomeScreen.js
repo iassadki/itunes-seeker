@@ -5,16 +5,28 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen({ navigation }) {
     const [musicList, setMusicList] = useState([]); // Initialiser l'état musicList avec un tableau vide
-    const [likedSongs, setLikedSongs] = useState([]); // Ajout d'un état pour les chansons aimées
+    const [likedSongs, setLikedSongs] = useState([]); // Initialiser l'état likedSongs avec un tableau vide
 
     useEffect(() => {
-        // Fonction pour récupérer la musique
+        // Fonction pour récupérer la musique depuis l'API
         const fetchMusic = async () => {
             try {
                 const response = await fetch('https://itunes.apple.com/search?media=music&term=djsnake');
                 const data = await response.json(); // Convertir la réponse en JSON
-                const musicWithLikeState = data.results.map(music => ({ ...music, liked: false })); // Ajouter un état liked à chaque musique
-                setMusicList(musicWithLikeState); // Mettre à jour l'état musicList avec les données de musique
+
+                // Récupérer les chansons aimées depuis AsyncStorage
+                const storedLikedSongsString = await AsyncStorage.getItem('likedSongs');
+                const storedLikedSongs = storedLikedSongsString ? JSON.parse(storedLikedSongsString) : [];
+
+                // Ajouter un état liked à chaque musique
+                const musicWithLikeState = data.results.map(music => ({
+                    ...music,
+                    liked: storedLikedSongs.some(item => item.trackId === music.trackId),
+                }));
+
+                // Mettre à jour les états
+                setMusicList(musicWithLikeState);
+                setLikedSongs(storedLikedSongs);
             } catch (error) {
                 console.error(error);
             }
@@ -22,31 +34,33 @@ export default function HomeScreen({ navigation }) {
         fetchMusic();
     }, []);
 
+    // Fonction pour mettre à jour les chansons aimées
+    const updateLikedSongs = async (updatedLikedSongs) => {
+        await AsyncStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs)); // Stocker les chansons aimées dans AsyncStorage
+        setLikedSongs(updatedLikedSongs);
+
+        // Mettre à jour l'état de chaque musique dans la liste principale
+        const updatedMusicList = musicList.map(music => ({
+            ...music,
+            liked: updatedLikedSongs.some(item => item.trackId === music.trackId),
+        }));
+        setMusicList(updatedMusicList);
+    };
+
     // Fonction pour gérer le clic sur le bouton de like
     const handleLike = async (music) => {
-        // Mettre à jour l'état de la musique likée
-        const updatedMusicList = musicList.map(item =>
-            item.trackId === music.trackId ? { ...item, liked: !item.liked } : item
-        );
-        setMusicList(updatedMusicList);
-
-        // Récupérer la liste actuelle des chansons aimées
-        const likedSongsString = await AsyncStorage.getItem('likedSongs');
-        const likedSongs = likedSongsString ? JSON.parse(likedSongsString) : [];
-
-        // Vérifier si la musique est déjà aimée
         const isLiked = likedSongs.some(item => item.trackId === music.trackId);
+        let updatedLikedSongs;
 
-        // Mettre à jour l'état likedSongs pour ajouter ou supprimer la musique aimée
         if (isLiked) {
-            const updatedLikedSongs = likedSongs.filter(item => item.trackId !== music.trackId);
-            AsyncStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs)); // Stocker les chansons aimées dans AsyncStorage
-            setLikedSongs(updatedLikedSongs);
+            // Supprimer la musique des chansons aimées
+            updatedLikedSongs = likedSongs.filter(item => item.trackId !== music.trackId);
         } else {
-            const updatedLikedSongs = [...likedSongs, { ...music, liked: true }];
-            AsyncStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs)); // Stocker les chansons aimées dans AsyncStorage
-            setLikedSongs(updatedLikedSongs);
+            // Ajouter la musique aux chansons aimées
+            updatedLikedSongs = [...likedSongs, { ...music, liked: true }];
         }
+
+        updateLikedSongs(updatedLikedSongs);
     };
 
     // Fonction pour gérer le clic sur un élément de musique
@@ -54,10 +68,13 @@ export default function HomeScreen({ navigation }) {
         navigation.navigate('SongDetailsScreen', { music });
     };
 
-    // Afficher les chansons aimées dans la console
-    useEffect(() => {
-        console.log("Liked Songs :", likedSongs.map(song => song.trackName));
-    }, [likedSongs]);
+    // Fonction pour naviguer vers l'écran des chansons aimées
+    const handleViewLikedSongs = () => {
+        navigation.navigate('LikedSongsScreen', {
+            likedSongs: [...likedSongs],
+            updateLikedSongs: updateLikedSongs, // Passer la fonction de mise à jour comme prop
+        });
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -73,10 +90,6 @@ export default function HomeScreen({ navigation }) {
                         showTrash={false}
                     />
                 ))}
-                <Button
-                    title="View Liked Songs"
-                    onPress={() => navigation.navigate('LikedSongsScreen', { likedSongs: [...likedSongs] })}
-                />
             </ScrollView>
         </SafeAreaView>
     );
