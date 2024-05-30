@@ -49,12 +49,6 @@ export default function HomeScreen({ navigation }) {
 
     // Fonction pour gérer le clic sur le bouton de like
     const handleLike = async (music) => {
-        // Mettre à jour l'état de la musique likée
-        const updatedMusicList = musicList.map(item =>
-            item.trackId === music.trackId ? { ...item, liked: !item.liked } : item
-        );
-        setMusicList(updatedMusicList);
-
         // Récupérer la liste actuelle des chansons aimées
         const likedSongsString = await AsyncStorage.getItem('likedSongs');
         const likedSongs = likedSongsString ? JSON.parse(likedSongsString) : [];
@@ -72,6 +66,12 @@ export default function HomeScreen({ navigation }) {
             AsyncStorage.setItem('likedSongs', JSON.stringify(updatedLikedSongs)); // Stocker les chansons aimées dans AsyncStorage
             setLikedSongs(updatedLikedSongs);
         }
+
+        // Mettre à jour l'état de la musique likée
+        const updatedMusicList = musicList.map(item =>
+            item.trackId === music.trackId ? { ...item, liked: !isLiked } : item
+        );
+        setMusicList(updatedMusicList);
     };
 
     // Fonction pour gérer le clic sur un élément de musique
