@@ -11,6 +11,7 @@ import ArtistDetailsScreen from './screens/ArtistDetailsScreen.js';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { LikedSongsProvider } from './context/LikedSongsContext';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,7 +62,7 @@ const HomeScreenNavigator = () => {
 
 export default function App() {
   return (
-    <Provider store={store}> 
+    <LikedSongsProvider>
       <SafeAreaView style={styles.safeArea}>
         <NavigationContainer>
           <Stack.Navigator
@@ -95,7 +96,7 @@ export default function App() {
 
         </NavigationContainer>
       </SafeAreaView>
-    </Provider>
+    </LikedSongsProvider>
   );
 }
 
